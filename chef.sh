@@ -81,6 +81,7 @@ knife node run_list add compute.rpc 'role[single-compute]'
 # Run Chef Client on each
 # Controller
 sudo ssh controller "chef-client"
+sudo ssh controller "chef-client"
 
 # Network
 sudo ssh network "chef-client"
@@ -92,10 +93,16 @@ sudo ssh network "update-rc.d -f openvswitch-switch remove"
 sudo ssh network "update-rc.d openvswitch-switch stop 20 0 1 6 . start 19 2 3 4 5 ."
 
 # Compute
-sudo ssh network "chef-client"
-sudo ssh network "ifdown eth1"
-sudo ssh network "ifconfig eth1 0.0.0.0 up&&sudo ip link set eth1 promisc on"
-sudo ssh network "ovs-vsctl add-port br-eth1 eth1"
+sudo ssh compute "chef-client"
+sudo ssh compute "ifdown eth1"
+sudo ssh compute "ifconfig eth1 0.0.0.0 up&&sudo ip link set eth1 promisc on"
+sudo ssh compute "ovs-vsctl add-port br-eth1 eth1"
 
-sudo ssh network "update-rc.d -f openvswitch-switch remove"
-sudo ssh network "update-rc.d openvswitch-switch stop 20 0 1 6 . start 19 2 3 4 5 ."
+sudo ssh compute "update-rc.d -f openvswitch-switch remove"
+sudo ssh compute "update-rc.d openvswitch-switch stop 20 0 1 6 . start 19 2 3 4 5 ."
+
+# Some workarounds - run chef-again
+sudo ssh controller "chef-client"
+sudo ssh network "chef-client"
+sudo ssh compute "chef-client"
+
