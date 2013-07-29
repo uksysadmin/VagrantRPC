@@ -1,0 +1,29 @@
+{
+  "name": "grizzly",
+  "description": "",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "nova": {
+      "network": {
+        "provider": "quantum"
+      },
+      "libvirt": {
+        "virt_type": "qemu"
+      }
+    },
+    "mysql": {
+      "allow_remote_root": true,
+      "root_network_acl": "%"
+    },
+    "osops_networks": {
+      "nova": "172.16.0.0/16",
+      "public": "172.16.0.0/16",
+      "management": "172.16.0.0/16"
+    }
+  }
+}
