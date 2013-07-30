@@ -3,7 +3,7 @@ VagrantRPC
 
 Vagrant scripts to create a Rackspace Private Cloud (http://www.rackspace.com/cloud/private/) running under VirtualBox
 
-Author :: Kevin Jackson (kevin.jackson@rackspace.co.uk)
+Author :: Kevin Jackson @itarchitectkev kevin.jackson AT rackspace.co.uk
 
 What you will need
 ==================
