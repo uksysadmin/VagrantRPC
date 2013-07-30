@@ -45,7 +45,7 @@ To access chef, controller, network and compute:
 	vagrant ssh chef
 	vagrant ssh controller
 	vagrant ssh network
-	vagrant compute
+	vagrant ssh compute
 
 Root access: 
 
