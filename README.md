@@ -38,12 +38,13 @@ Accessing Nodes
 ===============
 To access chef, controller, network and compute:
 
-* vagrant ssh chef
-* vagrant ssh controller
-* vagrant ssh network
-* vagrant compute
+	vagrant ssh chef
+	vagrant ssh controller
+	vagrant ssh network
+	vagrant compute
 
 Root access: 
+
 	sudo -i
 
 
@@ -52,10 +53,12 @@ Using your Rackspace Private Cloud
 Log into Horizon using: admin / secrete
 
 Perform commands on controller:
+
 	vagrant ssh controller
 	. openrc
 
 Creating a network
+
 	quantum net-create --provider:physical_network=ph-eth1 --provider:network_type=vlan --provider:segmentation_id=100 demoNet1
 
 	quantum subnet-create --name demoSubnet1 demoNet1 10.0.0.0/24
