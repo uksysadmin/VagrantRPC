@@ -61,6 +61,8 @@ sudo ssh network "ovs-vsctl add-port br-eth1 eth1"
 sudo ssh network "update-rc.d -f openvswitch-switch remove"
 sudo ssh network "update-rc.d openvswitch-switch stop 20 0 1 6 . start 19 2 3 4 5 ."
 
+knife exec -E 'nodes.transform("chef_environment:_default") { |n| n.chef_environment("grizzly") }'
+
 # Compute
 sudo ssh compute "chef-client"
 sudo ssh compute "ifdown eth1"
