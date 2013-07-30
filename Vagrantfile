@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 nodes = {
-    #'proxy'	=> [1, 110],
+    'proxy'	=> [1, 110],
     'controller'  => [1, 200],
     'network'  => [1, 201],
     'compute'  => [1, 202],
