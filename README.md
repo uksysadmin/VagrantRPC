@@ -32,7 +32,7 @@ Networks
 * chef: eth0 (nat), eth1 (unused), eth2 (172.16.0.199/16)
 * controller: eth0 (nat), eth1 (unused), eth2 (172.16.0.200/16)
 * network: eth0 (nat), eth1 (Data), eth2 (172.16.0.201/16)
-* compute: eth0 (nat), egh1 (Data), eth2 (172.16.0.202/16)
+* compute: eth0 (nat), eth1 (Data), eth2 (172.16.0.202/16)
 
 Interfaces
 * Horizon: http://172.16.0.200/    username: admin | password: secrete
