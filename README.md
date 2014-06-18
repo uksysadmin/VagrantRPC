@@ -1,7 +1,7 @@
 VagrantRPC
 ==========
 
-Vagrant scripts to create a Rackspace Private Cloud (http://www.rackspace.com/cloud/private/) running under VirtualBox
+Unofficial vagrant scripts to create a Rackspace Private Cloud (http://www.rackspace.com/cloud/private/) running under VirtualBox using the Rackspace Private Cloud scripted tools.
 
 Author :: Kevin Jackson @itarchitectkev kevin.jackson AT rackspace.co.uk
 
@@ -15,7 +15,7 @@ What you will need
 Instructions
 ============
 	
-	git clone https://github.com/uksysadmin/VagrantRPC.git
+	git clone https://github.com/bigcloudsolutions/VagrantRPC.git
 	cd VagrantRPC
 	vagrant up
 
@@ -29,22 +29,17 @@ Network Interfaces
 * eth2 Host Network (where your VirtualBox hosts live)
 
 Networks
-* chef: eth0 (nat), eth1 (unused), eth2 (172.16.0.199/16)
-* controller: eth0 (nat), eth1 (unused), eth2 (172.16.0.200/16)
-* network: eth0 (nat), eth1 (Data), eth2 (172.16.0.201/16)
-* compute: eth0 (nat), eth1 (Data), eth2 (172.16.0.202/16)
+* controller: eth0 (nat), eth1 (Neutron Provider), eth2 (172.16.0.200/16)
+* compute: eth0 (nat), eth1 (Neutron Provider), eth2 (172.16.0.202/16)
 
 Interfaces
-* Horizon: http://172.16.0.200/    username: admin | password: secrete
-* Chef: http://172.16.0.199/       username/password (in /etc/chef-server/chef.rb)
+* Horizon: http://172.16.0.200/    username: admin | password: openstack
 
 Accessing Nodes
 ===============
-To access chef, controller, network and compute:
+To access controller and compute:
 
-	vagrant ssh chef
 	vagrant ssh controller
-	vagrant ssh network
 	vagrant ssh compute
 
 Root access: 
@@ -54,15 +49,14 @@ Root access:
 
 Using your Rackspace Private Cloud
 ==================================
-Log into Horizon using: admin / secrete
+Log into Horizon using: admin / openstack
 
 Perform commands on controller:
 
 	vagrant ssh controller
 	. openrc
 
-Creating a network
+Creating a network (example):
 
-	quantum net-create --provider:physical_network=ph-eth1 --provider:network_type=vlan --provider:segmentation_id=100 demoNet1
-
-	quantum subnet-create --name demoSubnet1 demoNet1 10.0.0.0/24
+	neutron net-create --provider:physical_network=ph-eth1 --provider:network_type=vlan --provider:segmentation_id=100 demoNet1
+	neutron subnet-create --name demoSubnet1 demoNet1 10.0.0.0/24

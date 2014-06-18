@@ -3,10 +3,8 @@
 
 nodes = {
     'proxy'	=> [1, 110],
-    'controller'  => [1, 200],
-    'network'  => [1, 201],
     'compute'  => [1, 202],
-    'chef'	=> [1, 199],
+    'controller'  => [1, 200],
 }
 
 Vagrant.configure("2") do |config|
@@ -51,14 +49,12 @@ Vagrant.configure("2") do |config|
                     vbox.customize ["modifyvm", :id, "--memory", 1024]
                     vbox.customize ["modifyvm", :id, "--cpus", 1]
 		    if prefix == "compute"
-                    	vbox.customize ["modifyvm", :id, "--memory", 3128]
+                    	vbox.customize ["modifyvm", :id, "--memory", 2048]
                         vbox.customize ["modifyvm", :id, "--cpus", 2]
+			vbox.customize ["modifyvm", :id, "--nicpromisc4", "allow-all"]
 		    elsif prefix == "controller"
-		        vbox.customize ["modifyvm", :id, "--memory", 2048]
-		    elsif prefix == "network"
-		        vbox.customize ["modifyvm", :id, "--memory", 1024]
-		    elsif prefix == "chef"
 		        vbox.customize ["modifyvm", :id, "--memory", 3172]
+			vbox.customize ["modifyvm", :id, "--nicpromisc4", "allow-all"]
 		    end
                 end
             end
