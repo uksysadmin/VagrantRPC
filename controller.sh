@@ -1,12 +1,12 @@
 # controller.sh
-set -x
+set -ex
 
 # Rabbit Password
 RMQ_PW="Passw0rd"
 
 # Rabbit IP address, this should be the host ip which is on
 # the same network used by your management network
-RMQ_IP="192.168.1.101"
+RMQ_IP="172.16.0.200"
 
 # Set the cookbook version that we will upload to chef
 COOKBOOK_VERSION="v4.2.2"
@@ -80,6 +80,7 @@ rabbitmq["enable"] = false
 rabbitmq["password"] = "${RMQ_PW}"
 rabbitmq["vip"] = "${RMQ_IP}"
 rabbitmq['node_ip_address'] = "${RMQ_IP}"
+rabbitmq['node_port'] = 5672
 chef_server_webui["web_ui_admin_default_password"] = "openstack"
 bookshelf["url"] = "https://172.16.0.200:4000"
 EOF
@@ -360,8 +361,8 @@ function sys_tuning() {
 }
 
 install_required_packages
-install_rabbit
 erlang_cookie
+install_rabbit
 setup_rabbit
 install_chef_server
 configure_chef_server
