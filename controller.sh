@@ -1,5 +1,5 @@
 # controller.sh
-set -ex
+set -x
 
 # Rabbit Password
 RMQ_PW="Passw0rd"
@@ -331,15 +331,14 @@ function install_controllers_ha() {
 function install_computes() {
     knife bootstrap compute.rpc -E rpcs -r 'role[single-compute]' --server-url https://172.16.0.200:4000
 
-    sleep 15 # Give Solr a chance to do some indexing so we can search
-
-    knife ssh "role:single-compute" chef-client
+    ssh compute chef-client
 }
 
 function neutron_interface() {
 
     ifdown eth1
     ifconfig eth1 0.0.0.0 up&&sudo ip link set eth1 promisc on
+    ovs-vsctl add-port br-eth1 eth1
 
     sudo ssh compute "ifdown eth1"
     sudo ssh compute "ifconfig eth1 0.0.0.0 up&&sudo ip link set eth1 promisc on"
@@ -348,7 +347,6 @@ function neutron_interface() {
 }
 
 function ovs_bridge() {
-	knife ssh "role:*" "ovs-vsctl add-port br-eth1 eth1"
 	chef-client
 	sudo ssh compute "chef-client"	
 }
