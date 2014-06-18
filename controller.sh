@@ -19,6 +19,7 @@ CONTROLLER1=$RMQ_IP
 # The environment use .241, .242, .243 for your HA VIPS.
 VIP_PREFIX="172.16.0"
 
+export CHEF_SERVER_URL=https://localhost:4000
 
 # Source in common env vars
 . /vagrant/common.sh
@@ -296,7 +297,7 @@ function configure_environment() {
     },
     "glance": {
       "images": [
-        "cirros",
+        "cirros"
       ],
       "image" : {
         "cirros": "https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img"
