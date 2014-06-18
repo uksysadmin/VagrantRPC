@@ -360,9 +360,9 @@ function sys_tuning() {
 }
 
 install_required_packages
+install_rabbit
 erlang_cookie
 setup_rabbit
-install_rabbit
 install_chef_server
 configure_chef_server
 install_chef_client
