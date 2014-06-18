@@ -28,8 +28,10 @@ Vagrant.configure("2") do |config|
    		# eth0 Nat (auto)
 		# eth1 data/vm network
                 box.vm.network :private_network, ip: "10.10.0.#{ip_start+i}", :netmask => "255.255.255.0" 
-		# eth2 host network
+		# eth2 mgmt network
                 box.vm.network :private_network, ip: "172.16.0.#{ip_start+i}", :netmask => "255.255.0.0"
+		# eth3 external network
+		box.vm.network :private_network, ip: "192.168.100.#{ip_start+i}", :netmask => "255.255.255.0" 
 
                 box.vm.provision :shell, :path => "#{prefix}.sh"
 
@@ -52,9 +54,11 @@ Vagrant.configure("2") do |config|
                     	vbox.customize ["modifyvm", :id, "--memory", 2048]
                         vbox.customize ["modifyvm", :id, "--cpus", 2]
 			vbox.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+			vbox.customize ["modifyvm", :id, "--nicpromisc4", "allow-all"]
 		    elsif prefix == "controller"
 		        vbox.customize ["modifyvm", :id, "--memory", 3172]
 			vbox.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+			vbox.customize ["modifyvm", :id, "--nicpromisc4", "allow-all"]
 		    end
                 end
             end
