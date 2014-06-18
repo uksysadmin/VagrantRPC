@@ -61,7 +61,7 @@ function install_rabbit() {
 
 function install_chef_server() {
     CHEF="https://www.opscode.com/chef/download-server?p=ubuntu&pv=12.04&m=x86_64"
-    CHEF_SERVER_PACKAGE_URL="${CHEF}
+    CHEF_SERVER_PACKAGE_URL="${CHEF}"
     wget -O /tmp/chef_server.deb ${CHEF_SERVER_PACKAGE_URL}
     dpkg -i /tmp/chef_server.deb
 
