@@ -329,7 +329,7 @@ function install_controllers_ha() {
 }
 
 function install_computes() {
-    knife bootstrap compute.rpc -E rpcs -r 'role[single-compute]' --server-url $CHEF_SERVER_URL;
+    knife bootstrap compute.rpc -E rpcs -r 'role[single-compute]' --server-url https://172.16.0.200:4000
 
     sleep 15 # Give Solr a chance to do some indexing so we can search
 
